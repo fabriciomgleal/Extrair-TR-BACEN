@@ -1,7 +1,6 @@
 from bcb import sgs
 from PySimpleGUI import PySimpleGUI as sg
 
-
 sg.theme('Reddit')
 layout = [
     [sg.Text("Extrator de Taxa Referencial")],
