@@ -1,3 +1,4 @@
+import calendar
 from bcb import sgs
 from PySimpleGUI import PySimpleGUI as sg
 
@@ -15,9 +16,9 @@ while True:
     mes = int(valor['mes'])
     ano = int(valor['ano'])
     if mes < 10:
-        taxa_referencial = sgs.get(226, start = '20'+str(ano)+'-0'+str(mes)+'-01', end = '20'+str(ano)+'-0'+str(mes)+'-28')
+        taxa_referencial = sgs.get(226, start = '20'+str(ano)+'-0'+str(mes)+'-01', end = '20'+str(ano)+'-0'+str(mes)+'-'+str(calendar.monthrange(int('20'+str(ano)), (mes))[1]))
     elif mes >= 10:
-        taxa_referencial = sgs.get(226, start = '20'+str(ano)+'-'+str(mes)+'-01', end = '20'+str(ano)+'-'+str(mes)+'-28')
+        taxa_referencial = sgs.get(226, start = '20'+str(ano)+'-'+str(mes)+'-01', end = '20'+str(ano)+'-'+str(mes)+'-'+str(calendar.monthrange(int('20'+str(ano)), (mes))[1]))
     if eventos == "Extrair":
         print(taxa_referencial)
     elif eventos == "Média":
@@ -26,8 +27,8 @@ while True:
         soma_taxa_referencial = valores_taxa_referencial.sum()
         media = soma_taxa_referencial/tamanho_dataframe
         if mes < 10:
-            sg.Popup("O valor médio da Taxa Referencial no mês 0"+str(mes)+" do ano 20"+str(ano)+" foi de "+str(media)+".")
+            sg.Popup("O valor médio da Taxa Referencial no mês 0"+str(mes)+" do ano 20"+str(ano)+" foi de "+str(media)+"%.")
         elif mes >= 10:
-            sg.Popup("O valor médio da Taxa Referencial no mês "+str(mes)+" do ano 20"+str(ano)+" foi de "+str(media)+".")
+            sg.Popup("O valor médio da Taxa Referencial no mês "+str(mes)+" do ano 20"+str(ano)+" foi de "+str(media)+"%.")
     elif eventos == "Encerrar":
         break
